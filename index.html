@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>GIPHY API</title>
+  </head>
+  <div class="container">
+
+  <h1>GIPHY</h1>
+
+  <div id="buttons-view"></div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+
+
+  <form id="category-form">
+      <label for="category-input">Add a Giphy category</label>
+      <input type="text" id="category-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <button id="add-giphy" type="submit">Add category</button>
+  </form>
+</div>
+<div class="col-md-6">
+
+
+    <form id="giphy-form">
+      <label for="giphy-input">Search for GIPHYS</label>
+      <input type="text" id="giphy-input"><br>
+
+      <button id="giphy-submit">Submit</button>
+    </form>
+  </div>
+  </div>
+
+    <!-- Movies will get dumped here -->
+    <div id="giphy-view"></div>
+  </div>
+
+    <script type="text/javascript" src="assets/javascript/giphy.js"></script>
+  <body>
+
+
+
+
+
+  </body>
+</html>
