@@ -21,11 +21,11 @@ function displayInfo() {
           .attr("data-animate", response.data[i].images.original.url)
           .attr("state", "still")
           .attr("src", $giphyImg.attr("data-still"))
-          .attr("width", "200")
+          .attr("width", "215")
           .attr("height", "125")
           .attr("data-giphname", giphs[i])
           .addClass("giph-img")
-          .css("padding", "5px");
+          .css("padding", "10px");
         var $giphyText = $("<span>");
         $giphyText.append(response.data[i].rating)
           .css("text-align", "center");
@@ -40,7 +40,7 @@ function displaySearchInfo() {
 
   var searchTerm = $("#giphy-input").val().trim();
   var apiKey = "6Qny4dlr1HaDqscS3xo7ydJJ2DNAsDQ1";
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key="+ apiKey +"&limit=5";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key="+ apiKey +"&limit=10&rating=g";
 
 
   $.ajax({
@@ -53,12 +53,16 @@ function displaySearchInfo() {
           .attr("data-animate", response.data[i].images.original.url)
           .attr("state", "still")
           .attr("src", $giphyImg.attr("data-still"))
-          .attr("width", "225")
+          .attr("width", "215")
           .attr("height", "125")
           .attr("data-giphname", giphs[i])
           .addClass("giph-img")
           .css("padding", "10px");
-        $("#giphy-view").append($giphyImg);
+          var $giphyText = $("<span>");
+          $giphyText.append(response.data[i].rating)
+            .css("text-align", "center");
+          $("#giphy-view").append($giphyImg);
+          $("#giphy-view").append($giphyText);
       }
   });
 
