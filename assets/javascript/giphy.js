@@ -6,10 +6,42 @@ var giphs = ["car", "soccer", "basketball"];
 
 function displayInfo() {
 
-  var searchTerm = $("#giphy-input").val().trim();
   var giphName = $(this).attr("data-name");
   var apiKey = "6Qny4dlr1HaDqscS3xo7ydJJ2DNAsDQ1";
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphName + "&api_key="+ apiKey +"&limit=5";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphName + "&api_key="+ apiKey +"&limit=10&rating=g";
+
+  $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+        console.log(response);
+        for (var i = 0; i < response.data.length; i++) {
+        var $giphyImg = $("<img>")
+        $giphyImg.attr("data-still", response.data[i].images.original_still.url)
+          .attr("data-animate", response.data[i].images.original.url)
+          .attr("state", "still")
+          .attr("src", $giphyImg.attr("data-still"))
+          .attr("width", "200")
+          .attr("height", "125")
+          .attr("data-giphname", giphs[i])
+          .addClass("giph-img")
+          .css("padding", "5px");
+        var $giphyText = $("<span>");
+        $giphyText.append(response.data[i].rating)
+          .css("text-align", "center");
+        $("#giphy-view").append($giphyImg);
+        $("#giphy-view").append($giphyText);
+      }
+  });
+
+}
+
+function displaySearchInfo() {
+
+  var searchTerm = $("#giphy-input").val().trim();
+  var apiKey = "6Qny4dlr1HaDqscS3xo7ydJJ2DNAsDQ1";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key="+ apiKey +"&limit=5";
+
 
   $.ajax({
         url: queryURL,
@@ -30,26 +62,25 @@ function displayInfo() {
       }
   });
 
-
 }
 
 function updateState() {
-$(".giph-img").on("click", function() {
-  var state = $(this).attr("state");
 
-for (var i = 0; i < giphs.length; i++) {
-  if (state == "still" && $("")) {
-    $(this).attr("src", $(this).attr("data-animate"))
-    .attr("state", "animate");
-  }
-  else if (state =="animate") {
-    $(this).attr("src", $(this).attr("data-still"))
-    .attr("state", "still");
-  }
-}
-});
-}
+  $(".giph-img").on("click", function() {
+    var state = $(this).attr("state");
 
+      for (var i = 0; i < giphs.length; i++) {
+        if (state == "still" && $("")) {
+          $(this).attr("src", $(this).attr("data-animate"))
+            .attr("state", "animate");
+        }
+        else if (state =="animate") {
+          $(this).attr("src", $(this).attr("data-still"))
+            .attr("state", "still");
+        }
+      }
+    });
+}
 
 function renderButtons() {
 
@@ -87,4 +118,6 @@ $("#add-giphy").on("click", function(event) {
 
   $("#giphy-submit").on("click", function(event) {
     event.preventDefault();
+    displaySearchInfo();
+    $("#giphy-input").val("");
   });

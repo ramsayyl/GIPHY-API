@@ -5,3 +5,8 @@ h1 {
 #buttons-view {
   text-align: center;
 }
+
+.giphy-view {
+  height:275px;
+  background-color: blue;
+}
